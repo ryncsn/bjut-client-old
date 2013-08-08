@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BJUT Client</string>
+    <string name="action_settings">Settings</string>
+    <string name="myLoginPasswdHint">Password</string>
+    <string name="myLoginNameHint">Name</string>
+    <string name="myLoginButtonText">Login</string>
+    <string name="logining">Login..</string>
+    <string name="WrongPW">Wrong password or user name.</string>
+    <string name="NetworkDown">Network not available</string>
+
+</resources>
