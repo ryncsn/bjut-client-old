@@ -16,7 +16,6 @@ public class jwUI extends FragmentActivity {
 	ViewPager jwViewPager;
 
 	@Override
-
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_ui);
@@ -31,11 +30,13 @@ public class jwUI extends FragmentActivity {
 	}
 
 	public class jwPagerAdapter extends FragmentStatePagerAdapter {
-		private String[] weeks={"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
+		private String[] weeks = { "星期一", "星期二", "星期三", "星期四", "星期五", "星期六",
+				"星期日" };
 		private int count = 7;
 		ArrayList<ArrayList<String>> courses;
 
-		public jwPagerAdapter(FragmentManager fm, ArrayList<ArrayList<String>> courses) {
+		public jwPagerAdapter(FragmentManager fm,
+				ArrayList<ArrayList<String>> courses) {
 			super(fm);
 			this.courses = courses;
 		}
@@ -44,18 +45,15 @@ public class jwUI extends FragmentActivity {
 		public Fragment getItem(int i) {
 			Bundle args = new Bundle();
 			Fragment fragment = new jwFragment();
-			args.putStringArrayList(jwFragment.ARG_CONTENT,
-					courses.get(i));
+			args.putStringArrayList(jwFragment.ARG_CONTENT, courses.get(i));
 			fragment.setArguments(args);
 			return fragment;
 		}
 
-		@Override
 		public int getCount() {
 			return count;
 		}
 
-		@Override
 		public CharSequence getPageTitle(int position) {
 			return weeks[position];
 		}

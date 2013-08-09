@@ -19,7 +19,6 @@ public class myPassageBrowser extends Activity {
 		Intent intent = getIntent();
 		setContentView(R.layout.my_browser);
 		passage = (TextView) this.findViewById(R.id.TextContent);
-		System.out.println(intent.getStringExtra(myLoginUI.MY_PASSAGE_ADD));
 		new myLoginBg()
 				.execute(intent.getStringExtra(myLoginUI.MY_PASSAGE_ADD));
 	}
@@ -46,8 +45,7 @@ public class myPassageBrowser extends Activity {
 				((TextView) findViewById(R.id.TextContent))
 						.setText(myParseModule.passageParser(params).trim());
 			} else
-				((TextView) findViewById(R.id.TextContent))
-				.setText("Error");
+				((TextView) findViewById(R.id.TextContent)).setText("Error");
 		}
 
 		protected String doInBackground(String... params) {
