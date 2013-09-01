@@ -1,7 +1,6 @@
 package cn.edu.bjut.bjutclient;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +15,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-public class jwLoginModule implements Serializable {
-
-	private static final long serialVersionUID = -8894070995329973277L;
+public class jwLoginModule {
 	/**
 	 * 
 	 */

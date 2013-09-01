@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class jwParseModule {
-	Document parseInfo;
+	private Document parseInfo;
 
 	public jwParseModule(String html) {
 		parseInfo = Jsoup.parse(html);

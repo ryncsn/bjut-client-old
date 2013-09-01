@@ -12,8 +12,8 @@ import android.support.v4.view.ViewPager;
 
 public class jwUI extends FragmentActivity {
 	public final static String MY_PASSAGE_ADD = "cn.edu.bjut.client.passageadd";
-	jwPagerAdapter currentMyPagerAdapter;
-	ViewPager jwViewPager;
+	private jwPagerAdapter currentMyPagerAdapter;
+	private ViewPager jwViewPager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

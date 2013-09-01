@@ -11,9 +11,9 @@ import android.support.v4.view.ViewPager;
 public class myLoginUI extends FragmentActivity implements
 		myPassageListFragment.PassageSelectedListener {
 	public final static String MY_PASSAGE_ADD = "cn.edu.bjut.client.passageadd";
-	myParseModule parser;
-	myPagerAdapter currentMyPagerAdapter;
-	ViewPager myViewPager;
+	private myParseModule parser;
+	private myPagerAdapter currentMyPagerAdapter;
+	private ViewPager myViewPager;
 
 	@Override
 	public void JumpToPassage(int number, String type) {

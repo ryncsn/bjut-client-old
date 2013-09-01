@@ -6,9 +6,7 @@ import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,6 +29,7 @@ public class MainActivity extends Activity {
 		new myLoginBg().execute(myLoginName.getText().toString(), myLoginPasswd
 				.getText().toString());
 	}
+
 	public void jwLoginAction(View v) {
 		System.out.println("Start Activity");
 		new jwLoginBg().execute(myLoginName.getText().toString(), myLoginPasswd
@@ -39,8 +38,8 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		super.onCreate(savedInstanceState);
 		myLoginName = (EditText) this.findViewById(R.id.myLoginName);
 		myLoginPasswd = (EditText) this.findViewById(R.id.myLoginPasswd);
 	}
@@ -71,16 +70,13 @@ public class MainActivity extends Activity {
 
 		protected void onPostExecute(String params) {
 			if (WrongPWFlag) {
-				setContentView(R.layout.activity_main);
 				new AlertDialog.Builder(MainActivity.this).setTitle(
 						MainActivity.this.getString(R.string.WrongPW)).show();
 			} else if (NWFlag) {
-				setContentView(R.layout.activity_main);
 				new AlertDialog.Builder(MainActivity.this).setTitle(
 						MainActivity.this.getString(R.string.NetworkDown))
 						.show();
 			} else
-				setContentView(R.layout.activity_main);
 				startActivity(new Intent(MainActivity.this, myLoginUI.class)
 						.putExtra(TRANSIT_MY_PAGE, firstPage));
 		}
@@ -113,6 +109,7 @@ public class MainActivity extends Activity {
 		private boolean WrongPWFlag = false;
 		private boolean NWFlag = false;
 		private String firstPage;
+
 		@Override
 		protected void onPreExecute() {
 			setContentView(R.layout.login);
@@ -137,8 +134,8 @@ public class MainActivity extends Activity {
 						.show();
 			} else
 				setContentView(R.layout.activity_main);
-				startActivity(new Intent(MainActivity.this, jwUI.class)
-						.putExtra(TRANSIT_JW_PAGE, firstPage));
+			startActivity(new Intent(MainActivity.this, jwUI.class).putExtra(
+					TRANSIT_JW_PAGE, firstPage));
 		}
 
 		protected String doInBackground(String... params) {

@@ -16,9 +16,9 @@ public class myPassageListFragment extends ListFragment {
 		void JumpToPassage(int number, String type);
 	}
 
-	String type;
-	View rootView;
-	PassageSelectedListener mCallback;
+	private String type;
+	private View rootView;
+	private PassageSelectedListener mCallback;
 	public static final String ARG_CONTENT = "titles";
 	public static final String ARG_TYPE = "type";
 

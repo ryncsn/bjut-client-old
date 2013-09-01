@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class myParseModule {
-	Document parseInfo;
+	private Document parseInfo;
 	public static final String[] INFO = { "448", "449", "454", "448", "450",
 			"451", "2822", "460" };
 	public static final String[] TITLE = { "校发通知", "院部处通知", "院部处工作信息",
