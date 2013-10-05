@@ -25,7 +25,6 @@ public class jwUI extends FragmentActivity {
 				intent.getStringExtra(MainActivity.MAIN_STRING));
 		currentMyPagerAdapter = new jwPagerAdapter(getSupportFragmentManager(),
 				parser.getTable());
-		;
 		jwViewPager.setAdapter(currentMyPagerAdapter);
 
 	}

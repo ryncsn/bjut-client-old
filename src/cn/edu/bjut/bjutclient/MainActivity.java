@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.RadioButton;
 public class MainActivity extends Activity {
 	public final static int EXTRA_TYPE_MY = 1;
 	public final static int EXTRA_TYPE_JW = 2;
+	public final static int EXTRA_TYPE_FILE = 3;
 	public final static String MY_NAME = "cn.edu.bjut.bjutclient.my.name";
 	public final static String MY_PASSWORD = "cn.edu.bjut.bjutclient.my.password";
 	public final static String JW_NAME = "cn.edu.bjut.bjutclient.jw.name";
@@ -58,20 +60,30 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			pd.dismiss();
-			System.out.println(intent.getStringExtra(MAIN_STRING));
-			if (intent.getIntExtra(MAIN_STATUS, 255) == 0)
-				startActivity(new Intent(MainActivity.this,
-						(loginType == EXTRA_TYPE_MY) ? myLoginUI.class
-								: jwUI.class).putExtra(MAIN_STRING,
-						intent.getStringExtra(MAIN_STRING)));
-			else if (intent.getIntExtra(MAIN_STATUS, 255) == 3)
+			if(pd!=null)pd.dismiss();
+			if (intent.getIntExtra(MAIN_STATUS, 255) == 0) {
+				if (loginType > 2)
+				{
+					startActivity(new Intent(MainActivity.this, jwUI.class)
+							.putExtra(MAIN_STRING,
+									intent.getStringExtra(MAIN_STRING)));
+					loginType -=2 ;
+				}
+				else
+					startActivity(new Intent(MainActivity.this,
+							(loginType == EXTRA_TYPE_MY) ? myLoginUI.class
+									: jwUI.class).putExtra(MAIN_STRING,
+							intent.getStringExtra(MAIN_STRING)));
+			} else if (intent.getIntExtra(MAIN_STATUS, 255) == 3)
 				new AlertDialog.Builder(MainActivity.this).setTitle(
 						MainActivity.this.getString(R.string.WrongPW)).show();
 			else if (intent.getIntExtra(MAIN_STATUS, 255) == 1
 					|| intent.getIntExtra(MAIN_STATUS, 255) == 2)
 				new AlertDialog.Builder(MainActivity.this).setTitle(
 						MainActivity.this.getString(R.string.NetworkDown))
+						.show();
+			else if (intent.getIntExtra(MAIN_STATUS, 255) == 4)
+				new AlertDialog.Builder(MainActivity.this).setTitle("未保存")
 						.show();
 			else
 				new AlertDialog.Builder(MainActivity.this).setTitle("未知错误")
@@ -133,6 +145,18 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.savedcourse:
+			loginType += 2;
+			this.startService(new Intent(this, Background.class).putExtra(
+					EXTRA_TYPE, EXTRA_TYPE_FILE));
+			break;
+		}
+
+		return false;
 	}
 
 }

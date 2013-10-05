@@ -1,8 +1,12 @@
 package cn.edu.bjut.bjutclient;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.util.EncodingUtils;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -24,20 +28,54 @@ public class Background extends IntentService {
 			new myLoginBg().execute(
 					intent.getStringExtra(MainActivity.MAIN_STRING_USR),
 					intent.getStringExtra(MainActivity.MAIN_STRING_PW));
-		}
-		if (intent.getIntExtra(MainActivity.EXTRA_TYPE, 0) == MainActivity.EXTRA_TYPE_JW) {
+		} else if (intent.getIntExtra(MainActivity.EXTRA_TYPE, 0) == MainActivity.EXTRA_TYPE_JW) {
 			new jwLoginBg().execute(
 					intent.getStringExtra(MainActivity.MAIN_STRING_USR),
 					intent.getStringExtra(MainActivity.MAIN_STRING_PW));
+		} else if (intent.getIntExtra(MainActivity.EXTRA_TYPE, 0) == MainActivity.EXTRA_TYPE_FILE) {
+
+			Intent newIntent = new Intent();
+			String temp = getStringCache("CourseTable");
+			newIntent.setAction(MainActivity.MAIN_ACTION_MY);
+			newIntent.putExtra(MainActivity.MAIN_STATUS, (temp==null)?4:0);
+			newIntent.putExtra(MainActivity.MAIN_STRING, temp);
+			sendBroadcast(newIntent);
 		}
 	}
 
 	public boolean putStringCache(String name, String content) {
+		try {
+			FileOutputStream out = openFileOutput(name, MODE_PRIVATE);
+			out.write(content.getBytes("UTF-8"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 
 	public String getStringCache(String name) {
-		return null;
+		byte[] buffer = null;
+		try {
+			FileInputStream in = openFileInput(name);
+			int length = in.available();
+			buffer = new byte[length];
+			in.read(buffer, 0, length);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return EncodingUtils.getString(buffer, "UTF-8");
 	}
 
 	private class myLoginBg extends AsyncTask<String, Integer, String> {
@@ -84,6 +122,7 @@ public class Background extends IntentService {
 		@Override
 		protected void onPostExecute(String params) {
 			Intent intent = new Intent();
+			putStringCache("CourseTable", firstPage);
 			intent.setAction(MainActivity.MAIN_ACTION_MY);
 			intent.putExtra(MainActivity.MAIN_STRING, firstPage);
 			intent.putExtra(MainActivity.MAIN_STATUS, flag);
