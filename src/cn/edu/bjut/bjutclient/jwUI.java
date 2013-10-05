@@ -22,9 +22,10 @@ public class jwUI extends FragmentActivity {
 		jwViewPager = (ViewPager) findViewById(R.id.my_ui_pager);
 		Intent intent = getIntent();
 		jwParseModule parser = new jwParseModule(
-				intent.getStringExtra(MainActivity.TRANSIT_JW_PAGE));
+				intent.getStringExtra(MainActivity.MAIN_STRING));
 		currentMyPagerAdapter = new jwPagerAdapter(getSupportFragmentManager(),
 				parser.getTable());
+		;
 		jwViewPager.setAdapter(currentMyPagerAdapter);
 
 	}

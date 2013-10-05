@@ -19,35 +19,29 @@
             android:name="cn.edu.bjut.bjutclient.myPassageBrowser"
             android:label="@string/app_name"
             android:parentActivityName="cn.edu.bjut.bjutclient.myLoginUI" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cn.edu.bjut.bjutclient.myLoginUI" />
         </activity>
         <activity
             android:name="cn.edu.bjut.bjutclient.myLoginUI"
             android:label="@string/app_name"
             android:parentActivityName="cn.edu.bjut.bjutclient.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cn.edu.bjut.bjutclient.MainActivity" />
         </activity>
         <activity
             android:name="cn.edu.bjut.bjutclient.jwUI"
             android:label="@string/app_name"
             android:parentActivityName="cn.edu.bjut.bjutclient.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cn.edu.bjut.bjutclient.MainActivity" />
         </activity>
         <activity
             android:name="cn.edu.bjut.bjutclient.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".Background"
+            android:exported="false"/>
+        
     </application>
 
 </manifest>

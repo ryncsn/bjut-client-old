@@ -2,50 +2,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/myLoginButton"
+    <RadioButton
+        android:id="@+id/jwRadio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:onClick="myLoginAction"
-        android:text="@string/myLoginButtonText" />
+        android:text="登录教务管理" />
 
     <EditText
-        android:id="@+id/myLoginPasswd"
+        android:id="@+id/loginPasswd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/myLoginButton"
-        android:layout_alignLeft="@+id/myLoginName"
-        android:layout_marginBottom="42dp"
+        android:layout_above="@id/jwRadio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
         android:ems="10"
         android:hint="@string/myLoginPasswdHint"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
-        android:id="@id/myLoginName"
+        android:id="@+id/loginName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/myLoginPasswd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
+        android:layout_above="@id/loginPasswd"
+        android:layout_alignLeft="@id/loginPasswd"
+        android:layout_alignRight="@id/loginPasswd"
+        android:layout_marginBottom="14dp"
         android:ems="10"
         android:hint="@string/myLoginNameHint" />
 
-    <Button
-        android:id="@+id/button1"
+    <RadioButton
+        android:id="@+id/myRadio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="jwLoginAction"
-        android:layout_below="@+id/myLoginButton"
+        android:layout_alignLeft="@id/jwRadio"
+        android:layout_below="@id/jwRadio"
+        android:text="登录个人信息" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:onClick="loginAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myRadio"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:text="Button" />
+        android:layout_marginTop="14dp"
+        android:text="@string/myLoginButtonText" />
 
 </RelativeLayout>

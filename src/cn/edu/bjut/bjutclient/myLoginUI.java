@@ -28,7 +28,7 @@ public class myLoginUI extends FragmentActivity implements
 		myViewPager = (ViewPager) findViewById(R.id.my_ui_pager);
 		Intent intent = getIntent();
 		parser = new myParseModule(
-				intent.getStringExtra(MainActivity.TRANSIT_MY_PAGE));
+				intent.getStringExtra(MainActivity.MAIN_STRING));
 		currentMyPagerAdapter = new myPagerAdapter(getSupportFragmentManager(),
 				parser);
 		myViewPager.setAdapter(currentMyPagerAdapter);

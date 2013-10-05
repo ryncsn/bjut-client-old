@@ -36,7 +36,7 @@ public class jwLoginModule {
 		httpRequest.setEntity(new UrlEncodedFormEntity(params,HTTP.ISO_8859_1));
 		HttpResponse httpResponse = (HttpResponse) jwreader
 				.execute(httpRequest);
-		if ((EntityUtils.toString(httpResponse.getEntity()).contains("错误")))
+		if ((EntityUtils.toString(httpResponse.getEntity()).contains("alert")))
 			throw new Exception("WRONG_PASSWD");
 		if (httpResponse.getStatusLine().getStatusCode() == 200) {
 
