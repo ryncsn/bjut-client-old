@@ -31,7 +31,8 @@ public class Background extends IntentService {
 		} else if (intent.getIntExtra(MainActivity.EXTRA_TYPE, 0) == MainActivity.EXTRA_TYPE_JW) {
 			new jwLoginBg().execute(
 					intent.getStringExtra(MainActivity.MAIN_STRING_USR),
-					intent.getStringExtra(MainActivity.MAIN_STRING_PW));
+					intent.getStringExtra(MainActivity.MAIN_STRING_PW),
+					intent.getStringExtra(MainActivity.MAIN_STRING_VC));
 		} else if (intent.getIntExtra(MainActivity.EXTRA_TYPE, 0) == MainActivity.EXTRA_TYPE_FILE) {
 
 			Intent newIntent = new Intent();
@@ -122,18 +123,23 @@ public class Background extends IntentService {
 		@Override
 		protected void onPostExecute(String params) {
 			Intent intent = new Intent();
+			if(firstPage!=null){
 			putStringCache("CourseTable", firstPage);
 			intent.setAction(MainActivity.MAIN_ACTION_MY);
 			intent.putExtra(MainActivity.MAIN_STRING, firstPage);
 			intent.putExtra(MainActivity.MAIN_STATUS, flag);
 			sendBroadcast(intent);
+			}else{
+				intent.putExtra(MainActivity.MAIN_STATUS, flag);
+				sendBroadcast(intent);
+			}
 		}
 
 		protected String doInBackground(String... params) {
 			jwLoginModule client = new jwLoginModule();
 
 			try {
-				client.loginIn(params[0], params[1]);
+				client.loginIn(params[0], params[1], params[2]);
 				firstPage = client.getCourseTable(params[0]);
 			} catch (ClientProtocolException e) {
 				flag = 1;
