@@ -35,13 +35,15 @@ public class jwLoginModule {
 		HttpPost httpRequest = new HttpPost(postingurl);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("__VIEWSTATE",
-				"dDwtMTg3MTM5OTI5MTs7Pq8P3aN430wxnb8E8wpdnb1wOEq+"));
-		params.add(new BasicNameValuePair("TextBox1", name));
+				"dDwyODE2NTM0OTg7Oz7QWQiyD/hfPCjVf5FA4RDQ+6tmDQ=="));
+		params.add(new BasicNameValuePair("txtUserName", name));
 		params.add(new BasicNameValuePair("TextBox2", password));
-		params.add(new BasicNameValuePair("TextBox3", vcode));
+		params.add(new BasicNameValuePair("txtSecretCode", vcode));
 		params.add(new BasicNameValuePair("RadioButtonList1", "Ñ§Éú"));
 		params.add(new BasicNameValuePair("Button1", ""));
 		params.add(new BasicNameValuePair("lbLanguage", ""));
+		params.add(new BasicNameValuePair("hidPdrs", ""));
+		params.add(new BasicNameValuePair("hidsc", ""));
 		httpRequest
 				.setEntity(new UrlEncodedFormEntity(params, HTTP.ISO_8859_1));
 		HttpResponse httpResponse = (HttpResponse) jwreader
@@ -57,11 +59,17 @@ public class jwLoginModule {
 
 	public String getCourseTable(String name) throws ClientProtocolException,
 			IOException {
+		String tmp;
+		System.out.println("Table Request");
 		HttpGet httpRequestR = new HttpGet("http://gdjwgl.bjut.edu.cn/xskbcx.aspx?xh="+name);
 		httpRequestR
 				.addHeader("Referer","http://gdjwgl.bjut.edu.cn/");
+		System.out.println("Before Table Request");
 		HttpResponse httpResponseR = jwreader.execute(httpRequestR);
-		return EntityUtils.toString(httpResponseR.getEntity());
+		System.out.println("After Table Request");
+		tmp=EntityUtils.toString(httpResponseR.getEntity());
+		System.out.println(tmp);
+		return tmp;
 	}
 
 	public Bitmap getVcode() throws ClientProtocolException, IOException,
